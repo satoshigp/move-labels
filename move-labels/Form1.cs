@@ -12,8 +12,8 @@ namespace move_labels
 {
     public partial class Form1 : Form
     {
-        int vx = -10;
-        int vy = -10;
+        int vx = -3;
+        int vy = -3;
         public Form1()
         {
             InitializeComponent();
@@ -26,14 +26,25 @@ namespace move_labels
             label1.Top += vy;
             if (label1.Left < 0)
             {
-                vx -= 10;
-                label1.Left -= vx;
+                vx =Math.Abs(vx);               
             }
+            
+            if(label1.Left>ClientSize.Width-label1.Width)
+            {
+                vx =-Math.Abs(vx);
+            }
+            
+            
             if (label1.Top < 0)
             {
-                vy -= 10;
-                label1.Top -= vy;
+                vy =Math.Abs(vy);            
             }
+           if(label1.Top>ClientSize.Height-label1.Height)
+           {
+               vy =-Math.Abs(vy);
+           }
+            
+            
         }
     }
 }

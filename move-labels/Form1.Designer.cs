@@ -36,7 +36,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(81, 114);
+            this.label1.Image = global::move_labels.Properties.Resources._5259ab9fc55975208d27f3a22a9ba67d;
+            this.label1.Location = new System.Drawing.Point(130, 151);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 12);
             this.label1.TabIndex = 0;
@@ -45,6 +46,7 @@
             // timer1
             // 
             this.timer1.Enabled = true;
+            this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
