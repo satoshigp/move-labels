@@ -12,9 +12,10 @@ namespace move_labels
 {
     public partial class Form1 : Form
     {
-        int vx = -5;
-        int vy = -5;
         int iTime = 0;
+        private static Random rand=new Random();
+        int vx =rand.Next(-10,105);
+        int vy =rand.Next(-10,105);
 
         public Form1()
         {
@@ -53,8 +54,10 @@ namespace move_labels
                 timer1.Enabled = false;
             }
 
-           
 
+
+            pictureBox1.Left = rand.Next(ClientSize.Width-pictureBox1.Width);
+            pictureBox1.Top = rand.Next(ClientSize.Height-pictureBox1.Height);
             pictureBox1.Left += vx;
             pictureBox1.Top += vy;
             if (pictureBox1.Left < 0)
@@ -78,6 +81,27 @@ namespace move_labels
            }
            
             
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //0以上 intの範囲内の乱数
+            Text = "" + rand.Next();
+            //サイコロの目の例
+            Text += "," + ((rand.Next() % 6) + 1);
+            //0以上、指定の値「未満」の乱数
+            //以下は0～5までの乱数
+            Text += "/" + rand.Next(6);
+
+            //指定の値以上、指定の値「未満」の乱数
+            //以下は、1～7までの乱数
+            Text += "/" + rand.Next(1, 7);
+
+            //0～1未満の乱数
+            Text += "/" + rand.NextDouble();
+            //NextDoubleを使って1～6の乱数を算出するには？
+
+            Text="/"+ (int)(rand.NextDouble()*6+1);
         }
     }
 }
