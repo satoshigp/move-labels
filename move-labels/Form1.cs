@@ -12,25 +12,39 @@ namespace move_labels
 {
     public partial class Form1 : Form
     {
-
+        
         int[] vx = new int[3];
         int[] vy = new int[3];
-
-       
-
         int iTime = 0;
+
+        Label[] labels = new Label[3];
         private static Random rand=new Random();
 
         public Form1()
         {
             InitializeComponent(); 
+            //vx,vyに乱数入れる
+            //冗長(じょうちょう)だったコードをまとめることができた
+            //冗長＝同じものが繰り返される
+            int idx = 0;
+            for (; idx < 3; idx++)
+            {
+                vx[idx] = rand.Next(-10, 10);
+                vy[idx] = rand.Next(-10, 10);
+            //ラベルを生成
+            labels[idx] = new Label();
+            labels[idx].AutoSize = true;//幅,高さ
+            labels[idx].Text = "◆";
+            //フォームに配置
+            Controls.Add(labels[idx]);
+
+            labels[idx].Left = rand.Next(ClientSize.Width-labels[idx].Width);
+            labels[idx].Top = rand.Next(ClientSize.Height - labels[idx].Height);
+
             
-            vx[0]  = rand.Next(-5, 5);
-            vy[0] = rand.Next(-5, 5);
-            vx[1] = rand.Next(-20, 5);
-            vy[1] = rand.Next(-5, 5);
-            vx[2] = rand.Next(-10, 5);
-            vy[2] = rand.Next(-5, 5);
+
+
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -65,80 +79,35 @@ namespace move_labels
                 //timer1.Enabled = false;
             }
 
-
-
-            label1.Left = rand.Next(ClientSize.Width-label1.Width);
-            label1.Top = rand.Next(ClientSize.Height - label1.Height);
-            label1.Left += vx[0];
-            label1.Top += vy[0];
-            label5.Left += vx[1];
-            label5.Top += vy[1];
-            label6.Left += vx[2];
-            label6.Top += vy[2];
-
-            if (label1.Left < 0)
+            for (int idx = 0; idx < 3; idx++)
             {
-                vx[0] =Math.Abs(vx[0]);               
-            }
-            
-            if(label1.Left>ClientSize.Width-label1.Width)
-            {
-                vx[0] =-Math.Abs(vx[0]);
-            }
+                labels[idx].Left += vx[idx];
+                labels[idx].Top += vy[idx];
+
+                if (labels[idx].Left < 0)
+                {
+                    vx[idx] = Math.Abs(vx[idx]);
+                }
+
+                if (labels[idx].Left > ClientSize.Width - labels[idx].Width)
+                {
+                    vx[idx] = -Math.Abs(vx[idx]);
+                }
 
 
-            if (label1.Top < 0)
-            {
-                vy[0] =Math.Abs(vy[0]);            
-            }
-            if (label1.Top > ClientSize.Height - label1.Height)
-           {
-               vy[0] =-Math.Abs(vy[0]);
-           }
-            label6.Left = rand.Next(ClientSize.Width - label6.Width);
-            label6.Top = rand.Next(ClientSize.Height - label6.Height);
-
-            if (label6.Left < 0)
-            {
-                vx[1] = Math.Abs(vx[1]);
-            }
-
-            if (label6.Left > ClientSize.Width - label6.Width)
-            {
-                vx[1] = -Math.Abs(vx[1]);
-            }
+                if (labels[idx].Top < 0)
+                {
+                    vy[idx] = Math.Abs(vy[idx]);
+                }
+                if (labels[idx].Top > ClientSize.Height - labels[idx].Height)
+                {
+                    vy[idx] = -Math.Abs(vy[idx]);
+                }
 
 
-            if (label6.Top < 0)
-            {
-                vy[1] = Math.Abs(vy[1]);
-            }
-            if (label6.Top > ClientSize.Height - label6.Height)
-            {
-                vy[1] = -Math.Abs(vy[1]);
-            }
-            label5.Left = rand.Next(ClientSize.Width - label5.Width);
-            label5.Top = rand.Next(ClientSize.Height - label5.Height);
-            if (label5.Left < 0)
-            {
-                vx[2] = Math.Abs(vx[2]);
-            }
-
-            if (label5.Left > ClientSize.Width - label5.Width)
-            {
-                vx[2] = -Math.Abs(vx[2]);
-            }
-
-
-            if (label5.Top < 0)
-            {
-                vy[2] = Math.Abs(vy[2]);
-            }
-            if (label5.Top > ClientSize.Height - label5.Height)
-            {
-                vy[2] = -Math.Abs(vy[2]);
             }
            
+
             
         }
 
@@ -161,6 +130,14 @@ namespace move_labels
             //NextDoubleを使って1～6の乱数を算出するには？
 
             Text="/"+ (int)(rand.NextDouble()*6+1);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            for(int idx=0;idx<10;idx++)
+            {
+                MessageBox.Show("" + idx);
+            }
         }
     }
 }
