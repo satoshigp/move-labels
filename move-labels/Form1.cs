@@ -12,14 +12,25 @@ namespace move_labels
 {
     public partial class Form1 : Form
     {
+
+        int[] vx = new int[3];
+        int[] vy = new int[3];
+
+       
+
         int iTime = 0;
         private static Random rand=new Random();
-        int vx =rand.Next(-10,105);
-        int vy =rand.Next(-10,105);
 
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            
+            vx[0]  = rand.Next(-5, 5);
+            vy[0] = rand.Next(-5, 5);
+            vx[1] = rand.Next(-20, 5);
+            vy[1] = rand.Next(-5, 5);
+            vx[2] = rand.Next(-10, 5);
+            vy[2] = rand.Next(-5, 5);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -48,37 +59,85 @@ namespace move_labels
             label3.Left = cpos.X-label3.Width/2;
             label3.Top = cpos.Y-label3.Height/2;
 
-            if ((pictureBox1.Left < cpos.X) && (pictureBox1.Right > cpos.X) && (pictureBox1.Top < cpos.Y) && (pictureBox1.Bottom > cpos.Y))
+            if ((label1.Left < cpos.X) && (label1.Right > cpos.X) && (label1.Top < cpos.Y) && (label1.Bottom > cpos.Y))
             {
-                pictureBox1.Visible = false;
-                timer1.Enabled = false;
+                //pictureBox1.Visible = false;
+                //timer1.Enabled = false;
             }
 
 
 
-            pictureBox1.Left = rand.Next(ClientSize.Width-pictureBox1.Width);
-            pictureBox1.Top = rand.Next(ClientSize.Height-pictureBox1.Height);
-            pictureBox1.Left += vx;
-            pictureBox1.Top += vy;
-            if (pictureBox1.Left < 0)
+            label1.Left = rand.Next(ClientSize.Width-label1.Width);
+            label1.Top = rand.Next(ClientSize.Height - label1.Height);
+            label1.Left += vx[0];
+            label1.Top += vy[0];
+            label5.Left += vx[1];
+            label5.Top += vy[1];
+            label6.Left += vx[2];
+            label6.Top += vy[2];
+
+            if (label1.Left < 0)
             {
-                vx =Math.Abs(vx);               
+                vx[0] =Math.Abs(vx[0]);               
             }
             
-            if(pictureBox1.Left>ClientSize.Width-pictureBox1.Width)
+            if(label1.Left>ClientSize.Width-label1.Width)
             {
-                vx =-Math.Abs(vx);
+                vx[0] =-Math.Abs(vx[0]);
             }
-            
-            
-            if (pictureBox1.Top < 0)
+
+
+            if (label1.Top < 0)
             {
-                vy =Math.Abs(vy);            
+                vy[0] =Math.Abs(vy[0]);            
             }
-           if(pictureBox1.Top>ClientSize.Height-pictureBox1.Height)
+            if (label1.Top > ClientSize.Height - label1.Height)
            {
-               vy =-Math.Abs(vy);
+               vy[0] =-Math.Abs(vy[0]);
            }
+            label6.Left = rand.Next(ClientSize.Width - label6.Width);
+            label6.Top = rand.Next(ClientSize.Height - label6.Height);
+
+            if (label6.Left < 0)
+            {
+                vx[1] = Math.Abs(vx[1]);
+            }
+
+            if (label6.Left > ClientSize.Width - label6.Width)
+            {
+                vx[1] = -Math.Abs(vx[1]);
+            }
+
+
+            if (label6.Top < 0)
+            {
+                vy[1] = Math.Abs(vy[1]);
+            }
+            if (label6.Top > ClientSize.Height - label6.Height)
+            {
+                vy[1] = -Math.Abs(vy[1]);
+            }
+            label5.Left = rand.Next(ClientSize.Width - label5.Width);
+            label5.Top = rand.Next(ClientSize.Height - label5.Height);
+            if (label5.Left < 0)
+            {
+                vx[2] = Math.Abs(vx[2]);
+            }
+
+            if (label5.Left > ClientSize.Width - label5.Width)
+            {
+                vx[2] = -Math.Abs(vx[2]);
+            }
+
+
+            if (label5.Top < 0)
+            {
+                vy[2] = Math.Abs(vy[2]);
+            }
+            if (label5.Top > ClientSize.Height - label5.Height)
+            {
+                vy[2] = -Math.Abs(vy[2]);
+            }
            
             
         }
